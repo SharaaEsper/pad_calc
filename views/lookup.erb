@@ -1,0 +1,21 @@
+<html>
+	<head>
+		<title>Pad MP Calc</title>
+		<script type="text/javascript">
+		        function go() {
+		                window.location.pathname += "/" + this.username.value;
+		                return false;
+		        }
+		</script>
+
+	</head>
+	<body>
+	<center>
+		<h1>Pad MP Calculator</h1>
+		<form id="tacocat" onsubmit="return go()" action ="#">
+			Username: <input type="text" class="username" id="username" value="" />
+			<input type="submit" value="Submit" class="buttons" />
+		</form>
+	</center>
+	</body>
+</html>
