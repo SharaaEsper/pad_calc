@@ -5,20 +5,6 @@ require 'open-uri'
 require 'mechanize'
 require 'json'
 
-
-
-#Get username
-#unless ARGV.size > 0
-#        puts "usage: #{$0} username"
-#        exit(1)
-#end
-
-
-#Set some vars
-#user = ARGV[0]
-
-
-
 module Pad_calc
 	def Pad_calc.lookup( params )
 
@@ -42,17 +28,10 @@ module Pad_calc
 			mid = monster["monster"]
 			name = monster_hash[mid]["name"]
 			mp = mp_mapping["#{mid}"]
-
-
-
 			total_mp += mp
 			end_result << { :name => name, :mp => mp }
 		end
-		puts end_result
-		puts total_mp
-#		end_result.each { |foo| puts foo }
-#		puts "Total MP: #{total_mp}"
-	return end_result, total_mp
+		return end_result, total_mp
 	end
 end
 
