@@ -12,6 +12,7 @@ module Pad_calc
 		user = params
 		agent = Mechanize.new
 		end_result = Array.new
+		mp = 0
 		total_mp = 0
 		f = File.read("include/mapping.json")
 		mp_mapping = JSON.parse(f)
@@ -27,7 +28,12 @@ module Pad_calc
 			#Grab Monster ID, Name and MP value
 			mid = monster["monster"]
 			name = monster_hash[mid]["name"]
-			mp = mp_mapping["#{mid}"]
+			#If it has a pdx_id we should use that instead
+			if monster_hash[mid].has_key? "pdx_id"
+				mp = mp_mapping[monster_hash[mid]["pdx_id"].to_s]
+			else
+				mp = mp_mapping["#{mid}"]
+			end
 			total_mp += mp
 			end_result << { :name => name, :mp => mp }
 		end
