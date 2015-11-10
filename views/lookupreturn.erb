@@ -1,6 +1,11 @@
 <html>
 	<head>
 		<title>Pad MP Calc</title>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="../lookupreturn.css" />
 	</head>
 	<body>
 	<center>
@@ -16,5 +21,31 @@
 					<% 	end %>
 		</table>
 	</center>
+	<script>
+				$('body').on('click', '.original tr', function (e) {
+						var r = $(e.currentTarget);
+						r.appendTo($('.selected'));
+						calculate();
+				});
+				$('body').on('click', '.selected tr', function (e) {
+						var r = $(e.currentTarget);
+						r.appendTo($('.original'));
+						calculate();
+				});
+				var calculate = function () {
+						var sum = $('.selected tr td:nth-child(2)').toArray().map(function (td) {
+								return $(td).text();
+						}).reduce(function (sum, i) {
+								return sum + parseInt(i);
+						}, 0);
+						$('.total').text(sum);
+				};
+				var t = $('table');
+				t.addClass('original table table-hover').wrap('<div class="column">');
+				var c = $('.column');
+				c.prepend('<h4>All Monsters (Click rows to select them)</h4>');
+				c.after('<div class="column"><h4>Selected Monsters</h4><table class="selected table table-hover"/><h3 class="go">Total Selected MP: <span class="total"></span></h3></div>');
+				calculate();
+	</script>
 	</body>
 </html>

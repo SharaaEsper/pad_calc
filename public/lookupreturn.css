@@ -1,0 +1,15 @@
+.column {
+  float: left;
+  width: 50%
+}
+
+table tr{
+  cursor: pointer
+}
+
+.got {
+  position:fixed;
+  bottom: 0px;
+  float: right;
+  background-color: #ccc;
+}
