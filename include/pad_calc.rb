@@ -17,7 +17,12 @@ module Pad_calc
 		f = File.read("include/mapping.json")
 		mp_mapping = JSON.parse(f)
 		#Grab some JSON from padherder
-		buffer = open("https://www.padherder.com/user-api/user/#{user}").read
+		begin
+			buffer = open("https://www.padherder.com/user-api/user/#{user}").read
+		rescue OpenURI::HTTPError
+			return "NoSuchUser", nil, nil
+		end
+		puts open("https://www.padherder.com/user-api/user/#{user}").read
 		user_json = JSON.parse(buffer)
 		buffer = open("https://www.padherder.com/api/monsters").read
 		monster_json = JSON.parse(buffer)
@@ -37,7 +42,8 @@ module Pad_calc
 			total_mp += mp
 			end_result << { :name => name, :mp => mp }
 		end
-		return end_result, total_mp
+		status = "okay"
+		return status,end_result, total_mp
 	end
 end
 

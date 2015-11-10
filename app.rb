@@ -16,7 +16,11 @@ class Calc_app < Sinatra::Base
 
 
 	get '/lookup/:username' do
-		@end_result,@total_mp = Pad_calc.lookup( params[:username] )
-		erb :lookupreturn
+		@status,@end_result,@total_mp = Pad_calc.lookup( params[:username] )
+		if @status != "okay"
+			erb :error
+		else
+			erb :lookupreturn
+		end
 	end
 end
