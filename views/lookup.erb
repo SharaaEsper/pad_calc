@@ -3,7 +3,10 @@
 		<title>Pad MP Calc</title>
 		<script type="text/javascript">
 		        function go() {
-		                window.location.pathname += "/" + this.username.value;
+					 					var qparam = [];
+										if(this.no10mp.checked) { qparam.push("no10mp=True"); }
+										if(this.no1mp.checked) { qparam.push("no1mp=True"); }
+		                window.location.href += "/" + this.username.value + (qparam.length ? "?" : "") + qparam.join("&");
 		                return false;
 		        }
 		</script>
@@ -14,7 +17,9 @@
 		<h1>Pad MP Calculator</h1>
 		<form id="tacocat" onsubmit="return go()" action ="#">
 			Padherder Username: <input type="text" class="username" id="username" value="" />
-			<input type="submit" value="Submit" class="buttons" />
+			<input type="submit" value="Submit" class="buttons" /><br>
+			Filter 1MP  Monsters:  <input type="checkbox" value="True" class="no1mp" id="no1mp" /><br>
+			Filter 10MP Monsters:  <input type="checkbox" value="True" class ="no10mp" id="no10mp" />
 		</form>
 	</center>
 	</body>
