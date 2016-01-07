@@ -49,6 +49,8 @@ module Pad_calc
 		filters.each do |filter|
 			if filter == "no1mp=True"
 				end_result.delete_if {|arr| arr[:mp] == 1}
+			elsif filter == "no5mp=True"
+				end_result.delete_if {|arr| arr[:mp] == 5}
 			elsif filter == "no10mp=True"
 				end_result.delete_if {|arr| arr[:mp] == 10}
 			end
