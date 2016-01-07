@@ -50,7 +50,7 @@ module Pad_calc
 			if filter == "no1mp=True"
 				end_result.delete_if {|arr| arr[:mp] == 1}
 			elsif filter == "no10mp=True"
-        end_result.delete_if {|arr| arr[:mp] == 10}
+				end_result.delete_if {|arr| arr[:mp] == 10}
 			end
 		end
 
