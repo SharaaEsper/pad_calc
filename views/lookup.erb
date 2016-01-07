@@ -6,6 +6,7 @@
                     var qparam = [];
                     if(this.no10mp.checked) { qparam.push("no10mp=True"); }
                     if(this.no1mp.checked) { qparam.push("no1mp=True"); }
+                    if(this.no5mp.checked) { qparam.push("no5mp=True"); }
 		                window.location.href += "/" + this.username.value + (qparam.length ? "?" : "") + qparam.join("&");
 		                return false;
 		        }
