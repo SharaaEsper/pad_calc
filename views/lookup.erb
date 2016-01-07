@@ -3,9 +3,9 @@
 		<title>Pad MP Calc</title>
 		<script type="text/javascript">
 		        function go() {
-					 					var qparam = [];
-										if(this.no10mp.checked) { qparam.push("no10mp=True"); }
-										if(this.no1mp.checked) { qparam.push("no1mp=True"); }
+                    var qparam = [];
+                    if(this.no10mp.checked) { qparam.push("no10mp=True"); }
+                    if(this.no1mp.checked) { qparam.push("no1mp=True"); }
 		                window.location.href += "/" + this.username.value + (qparam.length ? "?" : "") + qparam.join("&");
 		                return false;
 		        }
