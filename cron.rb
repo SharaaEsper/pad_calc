@@ -41,7 +41,7 @@ f =File.open("include/mapping.json.tmp", "w")
 	f.write(mapping.to_json)
 f.close
 
-FileUtils.rm('include/mapping.json.bk')
+FileUtils.rm('include/mapping.json.bk', :force => true)
 FileUtils.mv('include/mapping.json', 'include/mapping.json.bk')
 FileUtils.mv('include/mapping.json.tmp', 'include/mapping.json')
 
