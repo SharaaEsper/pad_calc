@@ -5,49 +5,84 @@
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<!-- jQuery library -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script type="text/javascript" src="../jquery.tablesorter.js"></script> 
 		<link rel="stylesheet" type="text/css" href="../lookupreturn.css" />
+
 	</head>
 	<body>
 	<center>
 		<h1>Results</h1>
 		<h3>Total MP in box: <%= @total_mp %></h3>
 		<h3>Total MP shown: <%= @total_mp_shown %></h3>
-		<h3>Breakdown</h3>
-		<table>
-			<% @end_result.each do |row| %>
-					<tr>
+  	<h3 class="go">
+		Total Selected MP: <span class="total"></span></h3>
+		<hr>
+  </center>
+	<div class="column">
+		<h4>All Monsters (Click rows to select them)</h4>
+		<table class="original table table-hover tablesorter" id="original">
+		<thead> 
+			<th>Monster Name</th>
+			<th>MP</th>
+		</thead>
+		<tbody>
+			<% @end_result.each_with_index do |row,idx| %>
+					<tr class="row-<%= idx %>">
 						<td><%= row[:name] %></td>
 						<td><%= row[:mp] %></td>
 					</tr>
 					<% 	end %>
+		</tbody>
 		</table>
-	</center>
-	<!-- Some JS from /u/javaru to let you select monsters and total it up all easylike -->
-	<script>
-				$('body').on('click', '.original tr', function (e) {
-						var r = $(e.currentTarget);
-						r.appendTo($('.selected'));
-						calculate();
-				});
-				$('body').on('click', '.selected tr', function (e) {
-						var r = $(e.currentTarget);
-						r.appendTo($('.original'));
-						calculate();
-				});
-				var calculate = function () {
-						var sum = $('.selected tr td:nth-child(2)').toArray().map(function (td) {
-								return $(td).text();
-						}).reduce(function (sum, i) {
-								return sum + parseInt(i);
-						}, 0);
-						$('.total').text(sum);
-				};
-				var t = $('table');
-				t.addClass('original table table-hover').wrap('<div class="column">');
-				var c = $('.column');
-				c.prepend('<h4>All Monsters (Click rows to select them)</h4>');
-				c.after('<div class="column"><h4>Selected Monsters</h4><table class="selected table table-hover"/><h3 class="go">Total Selected MP: <span class="total"></span></h3></div>');
-				calculate();
-	</script>
-	</body>
+	</div>
+	<div class="column">
+		<h4>Selected Monsters</h4>
+		<table class="selected table table-hover tablesorter" id="selected">
+		<thead>
+			<th>Monster Name</th>
+			<th>MP</th>
+		</thead>
+		<tbody>
+		</tbody>
+		</table>
+
+  </div>
+</body>
+<script>
+       $(".original tbody").on( "click", "tr", function() {
+
+
+           var row_id = ($(this).attr('class').split(' ')[0]);
+
+           if ($('.selected .' + row_id).length > 0) {
+            // do nothing, probably should use .not() up there
+           } else {
+            $(this).addClass('cloned').clone().prependTo($('.selected'));
+           }
+           calculate();
+       })
+       $(".selected tbody").on( "click", "tr", function() {
+
+           var row_id = ($(this).attr('class').split(' ')[0]);
+
+          $('.original .' + row_id).removeClass('cloned');
+           $(this).remove();
+           calculate();
+       })
+       
+        var calculate = function () {
+            var sum = $('.selected tr td:nth-child(2)').toArray().map(function (td) {
+                return $(td).text();
+            }).reduce(function (sum, i) {
+                return sum + parseInt(i);
+            }, 0);
+            $('.total').text(sum);
+        };
+        var t = $('table');
+        var c = $('.column');
+        calculate();
+
+        $("#original").tablesorter( {sortList: [[1,1]]} );
+        $("#selected").tablesorter();
+</script>
 </html>
