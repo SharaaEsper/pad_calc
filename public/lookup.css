@@ -23,6 +23,7 @@ body {
 
 @media (min-width: 400px) {
 	#page {
+		min-width: 360px;
 		border-radius: 30px;
 		box-shadow: black 1px 1px 20px;
 		position: absolute;
