@@ -2,27 +2,46 @@
 	<head>
 		<title>Pad MP Calc</title>
 		<script type="text/javascript">
-		        function go() {
-                    var qparam = [];
-                    if(this.no10mp.checked) { qparam.push("no10mp=True"); }
-                    if(this.no1mp.checked) { qparam.push("no1mp=True"); }
-                    if(this.no5mp.checked) { qparam.push("no5mp=True"); }
-		                window.location.href += "/" + this.username.value + (qparam.length ? "?" : "") + qparam.join("&");
-		                return false;
-		        }
+				function go() {
+						var qparam = [];
+						if(this.no10mp.checked) { qparam.push("no10mp=True"); }
+						if(this.no1mp.checked) { qparam.push("no1mp=True"); }
+						if(this.no5mp.checked) { qparam.push("no5mp=True"); }
+						if(this.noonteam.checked) { qparam.push("noonteam=True"); }
+						if(this.noprio0.checked) { qparam.push("noprio0=True"); }
+						if(this.noprio1.checked) { qparam.push("noprio1=True"); }
+						if(this.noprio2.checked) { qparam.push("noprio2=True"); }
+						if(this.noprio3.checked) { qparam.push("noprio3=True"); }
+						window.location.href += "/" + this.username.value + (qparam.length ? "?" : "") + qparam.join("&");
+						return false;
+				}
 		</script>
-
+		<link rel="stylesheet" href=" http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" media="all">
+		<link type="text/css" rel="stylesheet" href="lookup.css" media="all" />	
 	</head>
 	<body>
-	<center>
-		<h1>Pad MP Calculator</h1>
-		<form id="tacocat" onsubmit="return go()" action ="#">
-			Padherder Username: <input type="text" class="username" id="username" value="" />
-			<input type="submit" value="Submit" class="buttons" /><br>
-			Filter 1MP  Monsters:  <input type="checkbox" value="True" class="no1mp" id="no1mp" /><br>
-			Filter 5MP  Monsters:  <input type="checkbox" value="True" class="no5mp" id="no5mp" /><br>
-			Filter 10MP Monsters:  <input type="checkbox" value="True" class ="no10mp" id="no10mp" />
-		</form>
-	</center>
+		<div id="page">
+			<h1>Pad MP Calculator</h1>
+			<form id="tacocat" onsubmit="return go()" action ="#" class="form-search form-inline">
+
+				<input type="text" class="textbox username form-control" id="username" placeholder="Padherder Username..." value="" />
+
+				<input type="submit" value="Submit" class="btn btn-default" />
+
+				<h3>Filters <span>(Select to remove from results)</span></h3>
+				<div id="checkboxes">
+					<table class="checkboxes table table-striped">
+						<tr><td><input type="checkbox" value="True" class="no1mp" id="no1mp" /></td><td><label for="no1mp">1MP  Monsters</label></td></tr>
+						<tr><td><input type="checkbox" value="True" class="no5mp" id="no5mp" /></td><td><label for="no5mp">5MP  Monsters</label></td></tr>
+						<tr><td><input type="checkbox" value="True" class ="no10mp" id="no10mp" /></td><td><label for="no10mp">10MP Monsters</label></td></tr>
+						<tr><td><input type="checkbox" value="True" class ="noonteam" id="noonteam" /></td><td><label for="noonteam">On Team</label></td></tr>
+						<tr><td><input type="checkbox" value="True" class="noprio0" id="noprio0" /></td><td><label for="noprio0">Zero Priority</label></td></tr>
+						<tr><td><input type="checkbox" value="True" class="noprio1" id="noprio1" /></td><td><label for="noprio1">Low Priority</label></td></tr>
+						<tr><td><input type="checkbox" value="True" class="noprio2" id="noprio2" /></td><td><label for="noprio2">Medium Priority</label></td></tr>
+						<tr><td><input type="checkbox" value="True" class="noprio3" id="noprio3" /></td><td><label for="noprio3">High Priority</label></td></tr>
+					</table>
+				</div>
+			</form>
+		</div>
 	</body>
 </html>

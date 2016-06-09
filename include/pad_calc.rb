@@ -12,6 +12,7 @@ module Pad_calc
 		user = username
 		agent = Mechanize.new
 		end_result = Array.new
+		stuff_on_team = Array.new
 		mp = 0
 		total_mp = 0
 		total_mp_shown = 0
@@ -42,7 +43,17 @@ module Pad_calc
 				mp = mp_mapping["#{mid}"]
 			end
 			total_mp += mp
-			end_result << { :name => name, :mp => mp }
+			end_result << { :name => name, :mp => mp, :id => monster["id"], :priority => monster["priority"] }
+		end
+
+		#Grab the ids of shit on teams
+		
+		user_json["teams"].each do |team|
+			stuff_on_team << team["leader"] 
+			stuff_on_team << team["sub1"] 
+			stuff_on_team << team["sub2"] 
+			stuff_on_team << team["sub3"] 
+			stuff_on_team << team["sub4"] 
 		end
 
 		#Apply filters
@@ -53,6 +64,16 @@ module Pad_calc
 				end_result.delete_if {|arr| arr[:mp] == 5}
 			elsif filter == "no10mp=True"
 				end_result.delete_if {|arr| arr[:mp] == 10}
+			elsif filter == "noonteam=True"
+				end_result.delete_if {|arr| stuff_on_team.include?(arr[:id])}	
+			elsif filter == "noprio0=True"
+				end_result.delete_if {|arr| arr[:priority] == 0}
+			elsif filter == "noprio1=True"
+				end_result.delete_if {|arr| arr[:priority] == 1}
+			elsif filter == "noprio2=True"
+				end_result.delete_if {|arr| arr[:priority] == 2}
+			elsif filter == "noprio3=True"
+				end_result.delete_if {|arr| arr[:priority] == 3}
 			end
 		end
 
