@@ -2,14 +2,30 @@ body {
 	text-align: center;
 }
 
+@media (min-width: 400px) {
+	body {
+		padding: 0 20px;
+		background: transparent url('background.png') no-repeat top left;
+		background-size: cover;
+	}
+}
+
 #page {
 	max-width: 480px;
     margin: 0 auto;
     box-sizing: border-box;
     padding: 20px;
     background: #e1e1e8;
-    border-radius: 30px;
-    margin-top: 40px;
+}
+
+@media (min-width: 400px) {
+	#page {
+		border-radius: 30px;
+		box-shadow: black 1px 1px 20px;
+		position: relative;
+		top: 50%;
+		transform: translateY(-50%);
+	}
 }
 
 h1 {
