@@ -33,8 +33,8 @@ monster_json.each do |foo|
         	        mp = arr[-3].to_s.scan(/>(.*)</)[0][0].to_i
                 end
         end
-		puts "Processing: #{mid} \r"	
-		mapping[mid.to_i] = mp.to_i
+	puts "Processing: #{mid} \r"	
+	mapping[mid.to_i] = mp.to_i
 end
 
 f =File.open("include/mapping.json.tmp", "w")
