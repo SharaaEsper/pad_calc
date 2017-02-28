@@ -12,10 +12,10 @@
 	<body>
 	<center>
 		<h1>Results</h1>
-		<h3>Total MP in box: <%= @total_mp %></h3>
-		<h3>Total MP shown: <%= @total_mp_shown %></h3>
+		<h3>Total MP in box: <%= @total_mp %><span class="total_shame">(<%= (@total_mp.to_f / 300000).round(2) %> shamedragons)</span></h3>
+		<h3>Total MP shown: <%= @total_mp_shown %><span class="shown_shame">(<%= (@total_mp_shown.to_f / 300000).round(2) %> shamedragons)</span></h3>
   	<h3 class="go">
-		Total Selected MP: <span class="total"></span></h3>
+		Total Selected MP: <span class="total"></span><span class="selected_shame"></span></h3>
 		<hr>
   </center>
 	<div class="column">
@@ -77,6 +77,7 @@
                 return sum + parseInt(i);
             }, 0);
             $('.total').text(sum);
+            $('.selected_shame').text('(' + (sum / 300000).toFixed(2) + ' shamedragons)');
         };
         var t = $('table');
         var c = $('.column');
