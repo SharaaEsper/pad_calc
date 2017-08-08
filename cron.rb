@@ -24,24 +24,16 @@ monster_json.each do |foo|
 	else
 		mid = foo["id"]
 	end
-	page = agent.get("http://puzzledragonx.com/en/monster.asp?n=#{mid}")
-		arr =  page.search('//table[@class = "tableprofile"]/tr/td[@class = "data"]')
-		mp = arr[-1].to_s.scan(/>(.*)</)[0][0].to_i
-		if mp == 0
-			mp = arr[-2].to_s.scan(/>(.*)</)[0][0].to_i
-			if mp == 0
-				mp = arr[-3].to_s.scan(/>(.*)</)[0][0].to_i
-			end
-		end
-		puts "Processing: #{mid} \r"	
-		mapping[mid.to_i] = mp.to_i
+	mp = foo["monster_points"] 
+	puts "Processing: #{mid} \r"	
+	mapping[mid.to_i] = mp.to_i
 end
 
 f =File.open("include/mapping.json.tmp", "w")
 f.write(mapping.to_json)
 f.close
 
-FileUtils.rm('include/mapping.json.bk', :force => true)
-FileUtils.mv('include/mapping.json', 'include/mapping.json.bk')
-FileUtils.mv('include/mapping.json.tmp', 'include/mapping.json')
+FileUtils.rm("#{File.dirname(__FILE__)}/include/mapping.json.bk", :force => true)
+FileUtils.mv("#{File.dirname(__FILE__)}/include/mapping.json", "#{File.dirname(__FILE__)}/include/mapping.json.bk")
+FileUtils.mv("#{File.dirname(__FILE__)}/include/mapping.json.tmp", "#{File.dirname(__FILE__)}/include/mapping.json")
 
